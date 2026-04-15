@@ -1,27 +1,20 @@
 Write-Output "Starting setup..."
 
-if (Test-Path ".venv") {
-   Write-Output "Directory .venv already exists."
-   Write-Output "Skipping virtual environment installation."
-}
-else {
-   Write-Output "Directory .venv does not exist."
-   Write-Output "Installing virtual environment..."
-   python -m venv .venv
-   Write-Output "Virtual environment installed."
+if (-not (Get-Command uv -ErrorAction SilentlyContinue)) {
+   Write-Output "Error: uv is not installed."
+   Write-Output "Install uv first: https://docs.astral.sh/uv/getting-started/installation/"
+   exit 1
 }
 
-Write-Output "Starting the virtual environment..."
-& .\.venv\Scripts\Activate.ps1
-Write-Output "Virtual environment started."
-
-Write-Output "Installing Python requirements..."
+Write-Output "Syncing uv projects..."
 Get-ChildItem -Directory | ForEach-Object {
-   if (Test-Path "$($_.FullName)\requirements.txt") {
-      Write-Output "Installing requirements in $($_.FullName)..."
-      pip install -r "$($_.FullName)\requirements.txt"
+   if (Test-Path "$($_.FullName)\pyproject.toml") {
+      Write-Output "Running uv sync in $($_.FullName)..."
+      Push-Location $_.FullName
+      uv sync
+      Pop-Location
    }
 }
-Write-Output "Python requirements installed."
+Write-Output "uv projects synced."
 
 Write-Output "Setup complete."

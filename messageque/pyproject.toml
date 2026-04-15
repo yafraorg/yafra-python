@@ -1,0 +1,12 @@
+[project]
+name = "yafra-messageque"
+version = "0.1.0"
+description = "Messaging queue samples"
+requires-python = ">=3.12"
+dependencies = [
+    "azure-eventgrid",
+    "paho-mqtt",
+]
+
+[tool.uv]
+package = false

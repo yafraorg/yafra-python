@@ -1,0 +1,13 @@
+[project]
+name = "yafra-extractor"
+version = "0.1.0"
+description = "Document and image text extraction samples"
+requires-python = ">=3.12"
+dependencies = [
+    "pillow",
+    "pyocr",
+    "wand",
+]
+
+[tool.uv]
+package = false

@@ -1,0 +1,13 @@
+[project]
+name = "yafra-pyside"
+version = "0.1.0"
+description = "PySide desktop UI samples"
+requires-python = ">=3.12"
+dependencies = [
+    "PySide6",
+    "PySide6_Addons",
+    "PySide6_Essentials",
+]
+
+[tool.uv]
+package = false

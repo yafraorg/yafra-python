@@ -1,0 +1,12 @@
+[project]
+name = "yafra-rich"
+version = "0.1.0"
+description = "Rich console samples"
+requires-python = ">=3.12"
+dependencies = [
+    "rich",
+    "rich-toolkit",
+]
+
+[tool.uv]
+package = false
